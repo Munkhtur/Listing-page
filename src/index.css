@@ -35,7 +35,11 @@ th{
 }
 
 .title{
-  margin-left: 20px;
+  display: flex;
+  flex: 1 1 100%;
+  /* margin: 20px ; */
+  padding: 0 10px 0 10px;
+
 }
 /* #outlined-search{
   height: 15px

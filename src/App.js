@@ -38,7 +38,8 @@ const App = () => {
     <div>
       <div className={'topBar'}>
         <h4>Management</h4>
-        <SearchBar onClick={onChange} onClear={onClear} clientNum={state.length} />
+        <h1>Clients</h1>
+        <SearchBar onClick={onChange} onClear={onClear} />
         <Content clients={state} />
       </div>
 

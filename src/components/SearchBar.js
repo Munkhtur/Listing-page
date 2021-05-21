@@ -1,6 +1,5 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Button, OutlinedInput } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add'
@@ -9,15 +8,20 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
+    // root: {
+    //     flexGrow: 1,
+    // },
     margin: {
         margin: theme.spacing(1),
     },
 
     searchBar: {
         background: 'white',
+        maxHeight: 42
+    },
+
+    btnContainer: {
+
     },
 
     addBtn: {
@@ -33,46 +37,72 @@ const useStyles = makeStyles((theme) => ({
         background: 'white'
     },
     Btn: {
-        margin: theme.spacing(1),
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        maxHeight: 42
+    },
+    mainBar: {
+        marginBottom: 8
     }
 
 }));
 
 let textInput = React.createRef();
 
-const SearchBar = ({ onClick, onClear, clientNum }) => {
+const SearchBar = ({ onClick, onClear }) => {
 
     const classes = useStyles();
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={8} >
-                <form onSubmit={onClick}>
-                    <h1>Clients</h1>
-                    <TextField
-                        ref={textInput}
+        <Grid className={classes.mainBar} container spacing={3}
+            justify="space-between"
+            alignItems="center"
+        >
+            <Grid container item sm={8} xs={12} direction="row" >
+                <Grid item sm={6} xs={12} style={{ marginRight: 16, marginBottom: 8 }}>
+                    <OutlinedInput
                         className={classes.searchBar}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon color={'action'} />
-                                </InputAdornment>
-                            ),
-                        }}
-                        id="outlined-search" type="search" variant="outlined" placeholder='Search' />
-                    <Button type='submit' className={classes.Btn} variant='contained' size='large'> Search</Button>
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <SearchIcon color={'action'} />
+                            </InputAdornment>
+                        }
+                        placeholder='Search'
+                        id="outlined-search" />
+                </Grid>
+
+
+                <Grid item >
+                    <Button onClick={onClick} className={classes.Btn} variant='contained' size='large' style={{ marginRight: 16 }}> Search</Button>
+                </Grid>
+                <Grid item >
                     <Button onClick={onClear} className={classes.Btn} variant='contained' size='large'> Clear</Button>
-                </form>
-                <p className='small'> {clientNum} Record{clientNum > 1 && 's'} found. Page 1 of 1</p>
+                </Grid>
+
             </Grid>
-            <Grid container
-                direction="column"
-                justify="flex-end"
-                alignItems="flex-end"
-                className={classes.right} item xs={4}>
-                <Button startIcon={<AddIcon />} className={classes.addBtn} variant='contained' size='large'>New Client</Button>
-                <Button startIcon={<FilterIcon />} className={classes.filterBtn} variant='outlined' size='large'>show filter</Button>
+
+            <Grid item sm={4} xs={12}>
+                <Grid container
+                    direction="column"
+                    alignItems="center"
+                >
+                    <Grid item>
+                        <Button
+                            startIcon={<AddIcon />}
+                            className={classes.addBtn}
+                            variant='contained' style={{ marginBottom: 8 }}>
+                            New Client
+                            </Button>
+                    </Grid>
+                    <Grid>
+                        <Button startIcon={<FilterIcon />} className={classes.filterBtn}
+
+                            variant='outlined' >
+
+                            show filter
+
+                        </Button>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid >
     )
