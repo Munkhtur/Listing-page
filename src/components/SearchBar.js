@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add'
 import FilterIcon from '@material-ui/icons/FilterList'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles = makeStyles((theme) => ({
     // root: {
@@ -38,15 +39,49 @@ const useStyles = makeStyles((theme) => ({
     },
     Btn: {
         backgroundColor: 'white',
-        maxHeight: 42
+        maxHeight: 42,
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 'small',
+            width: '250px',
+
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: 'small',
+            width: '5px',
+            padding: 1,
+        }
     },
     mainBar: {
-        marginBottom: 8
+        marginBottom: 8,
+
+        [theme.breakpoints.down('sm')]: {
+            spacing: 2,
+            justify: 'space-between',
+        },
+        [theme.breakpoints.down('md')]: {
+            spacing: 2,
+            justify: 'space-between',
+        }
+    },
+    smIcon: {
+        [theme.breakpoints.down('md')]: {
+            display: 'none'
+        },
+        [theme.breakpoints.down('xs')]: {
+            display: 'block'
+        }
+    },
+    bgText: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'none'
+        },
+        [theme.breakpoints.down('bg')]: {
+            display: 'block'
+        }
     }
 
 }));
 
-let textInput = React.createRef();
 
 const SearchBar = ({ onClick, onClear }) => {
 
@@ -58,7 +93,7 @@ const SearchBar = ({ onClick, onClear }) => {
             alignItems="center"
         >
             <Grid container item sm={8} xs={12} direction="row" >
-                <Grid item sm={6} xs={12} style={{ marginRight: 16, marginBottom: 8 }}>
+                <Grid item sm={5} xs={12} style={{ marginRight: 16, marginBottom: 8 }}>
                     <OutlinedInput
                         className={classes.searchBar}
                         startAdornment={
@@ -71,11 +106,15 @@ const SearchBar = ({ onClick, onClear }) => {
                 </Grid>
 
 
-                <Grid item >
-                    <Button onClick={onClick} className={classes.Btn} variant='contained' size='large' style={{ marginRight: 16 }}> Search</Button>
-                </Grid>
-                <Grid item >
-                    <Button onClick={onClear} className={classes.Btn} variant='contained' size='large'> Clear</Button>
+                <Grid item container sm={6} xs={12} direction="row">
+                    <Grid item sm={6} xs={5}>
+
+                        <Button onClick={onClick} className={classes.Btn} variant='contained' size='large' style={{ marginRight: 16 }}> <span className={classes.smIcon}><SearchIcon /></span><span className={classes.bgText}>Search</span></Button>
+                    </Grid>
+                    <Grid item sm={6} xs={5} >
+
+                        <Button onClick={onClear} className={classes.Btn} variant='contained' size='large'> <span className={classes.smIcon}><ClearIcon /></span><span className={classes.bgText}>Clear</span></Button>
+                    </Grid>
                 </Grid>
 
             </Grid>
